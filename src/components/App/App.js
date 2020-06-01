@@ -4,6 +4,7 @@ import axios from 'axios';
 import Navigation from '../Layouts/Navigation/Navigation';
 import Users from '../Users/Users';
 import Search from '../Search/Search';
+import Alerts from '../Layouts/Alerts/Alerts';
 import './App.css';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     this.state = {
       users: [],
       loading: false,
+      alert: null,
     };
   }
 
@@ -35,16 +37,31 @@ class App extends Component {
     this.setState({ users: [], loading: false });
   };
 
+  setAlert = (type, message) => {
+    this.setState({ alert: { type, message } });
+    setTimeout(() => this.closeAlert(), 2000);
+  };
+
+  closeAlert = () => this.setState({ alert: null });
+
   render() {
-    const { users, loading } = this.state;
+    const { users, loading, alert } = this.state;
     return (
       <Fragment>
         <Navigation icon="fab fa-github" title="GitHub Finder" />
         <Container>
+          {alert && (
+            <Alerts
+              type={alert.type}
+              message={alert.message}
+              onClose={this.closeAlert}
+            />
+          )}
           <Search
             searchUsers={this.searchUsers}
             clearUsers={this.clearUsers}
             showClear={users.length > 0 ? true : false}
+            setAlert={this.setAlert}
           />
           <Users loading={loading} users={users} />
         </Container>
