@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 
-const UserItem = ({ user: { id, login, avatar_url, html_url } }) => {
+const UserItem = (props) => {
+  const { id, login, avatar_url, html_url } = props.user;
   return (
     <Card
       border="primary"
