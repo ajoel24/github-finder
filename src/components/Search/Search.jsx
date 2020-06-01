@@ -43,7 +43,11 @@ class Search extends Component {
               Find the details of GitHub users.
             </Form.Text>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button
+            variant="primary"
+            type="submit"
+            style={{ marginRight: '1rem' }}
+          >
             Submit
           </Button>
           {this.props.showClear && (
