@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CardColumns } from 'react-bootstrap';
 import UserItem from './UserItem';
 import SpinnerItem from '../Layouts/Spinner/SpinnerItem';
@@ -12,4 +13,8 @@ const Users = (props) =>
     <CardColumns>{props.users.map(generateUser)}</CardColumns>
   );
 
+Users.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  users: PropTypes.array.isRequired,
+};
 export default Users;
