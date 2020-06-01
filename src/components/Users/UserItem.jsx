@@ -6,7 +6,7 @@ const UserItem = ({ user: { id, login, avatar_url, html_url } }) => {
   return (
     <Card
       border="primary"
-      style={{ width: '20vw' }}
+      style={{ minWidth: '20vw' }}
       id={id}
       className="text-center"
     >
