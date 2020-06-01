@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Container } from 'react-bootstrap';
 import Navigation from '../Layouts/Navigation/Navigation';
+import Users from '../Users/Users';
 import './App.css';
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
       <Fragment>
         <Navigation icon="fab fa-github" title="GitHub Finder" />
         <Container>
-          <h1>Hello</h1>
+          <Users />
         </Container>
       </Fragment>
     );
