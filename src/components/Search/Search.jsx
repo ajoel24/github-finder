@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Button, Jumbotron } from 'react-bootstrap';
 
 class Search extends Component {
@@ -13,7 +14,12 @@ class Search extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.searchUsers(this.state.username);
+    this.setState({ username: '' });
+  };
+
+  handleClear = (e) => {
+    this.props.clearUsers();
   };
 
   render() {
@@ -36,10 +42,21 @@ class Search extends Component {
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          {this.props.showClear && (
+            <Button variant="secondary" type="clear" onClick={this.handleClear}>
+              Clear Users
+            </Button>
+          )}
         </Form>
       </Jumbotron>
     );
   }
 }
+
+Search.propTypes = {
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  showClear: PropTypes.bool.isRequired,
+};
 
 export default Search;
