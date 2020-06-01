@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import Navigation from '../Layouts/Navigation/Navigation';
 import Users from '../Users/Users';
+import Search from '../Search/Search';
 import './App.css';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
       <Fragment>
         <Navigation icon="fab fa-github" title="GitHub Finder" />
         <Container>
+          <Search />
           <Users loading={this.state.loading} users={this.state.users} />
         </Container>
       </Fragment>
