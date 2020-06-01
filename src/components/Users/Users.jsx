@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserItem from './UserItem';
-import { CardDeck } from 'react-bootstrap';
+import { CardColumns } from 'react-bootstrap';
 
 class Users extends Component {
   constructor() {
@@ -25,6 +25,18 @@ class Users extends Component {
           avatar_url: 'https://avatars0.githubusercontent.com/u/2?v=4',
           html_url: 'https://github.com/defunkt',
         },
+        {
+          id: '4',
+          login: 'defunkt',
+          avatar_url: 'https://avatars0.githubusercontent.com/u/2?v=4',
+          html_url: 'https://github.com/defunkt',
+        },
+        {
+          id: '5',
+          login: 'defunkt',
+          avatar_url: 'https://avatars0.githubusercontent.com/u/2?v=4',
+          html_url: 'https://github.com/defunkt',
+        },
       ],
     };
   }
@@ -34,7 +46,7 @@ class Users extends Component {
   }
 
   render() {
-    return <CardDeck>{this.state.users.map(this.generateUser)}</CardDeck>;
+    return <CardColumns>{this.state.users.map(this.generateUser)}</CardColumns>;
   }
 }
 

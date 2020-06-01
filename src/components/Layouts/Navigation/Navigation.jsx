@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar } from 'react-bootstrap';
 
-class Navigation extends Component {
-  static defaultProps = {
-    title: 'GitHub Finder',
-    icon: 'fas fa-github',
-  };
+const Navigation = (props) => {
+  const { icon, title } = props;
 
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
-  };
+  return (
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand href="#home">
+        <i className={icon}></i>
+        {title}
+      </Navbar.Brand>
+    </Navbar>
+  );
+};
 
-  render() {
-    return (
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">
-          <i className={this.props.icon}></i>
-          {this.props.title}
-        </Navbar.Brand>
-      </Navbar>
-    );
-  }
-}
+Navigation.defaultProps = {
+  icon: 'fab fa-github',
+  title: 'GitHub Finder',
+};
+
+Navigation.propTypes = {
+  icon: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default Navigation;
