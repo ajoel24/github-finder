@@ -8,22 +8,25 @@ const Navigation = (props) => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">
+      <Navbar.Brand as={Link} to="/">
         <i className={icon}></i>
         {title}
       </Navbar.Brand>
-      <Nav variant="tabs" activeKey="/">
-        <Nav.Item>
-          <Link to="/">
-            <Nav.Link href="/">Home</Nav.Link>
-          </Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Link to="/about">
-            <Nav.Link href="/about">About</Nav.Link>
-          </Link>
-        </Nav.Item>
-      </Nav>
+
+      <Navbar.Collapse>
+        <Nav variant="pills" activeKey="/">
+          <Nav.Item eventkey={1} href="/">
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item eventkey={1} href="/about">
+            <Nav.Link as={Link} to="/about">
+              About
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 };

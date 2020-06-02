@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import Navigation from '../Layouts/Navigation/Navigation';
 import Users from '../Users/Users';
+import User from '../Users/User';
 import Search from '../Search/Search';
 import Alerts from '../Layouts/Alerts/Alerts';
 import About from '../Pages/About';
@@ -14,6 +15,7 @@ class App extends Component {
     super();
     this.state = {
       users: [],
+      user: {},
       loading: false,
       alert: null,
     };
@@ -39,6 +41,14 @@ class App extends Component {
     this.setState({ users: [], loading: false });
   };
 
+  getUser = async (username) => {
+    this.setState({ loading: true });
+    const userSearchRes = await axios.get(
+      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+    );
+    this.setState({ user: userSearchRes.data, loading: false });
+  };
+
   setAlert = (type, message) => {
     this.setState({ alert: { type, message } });
     setTimeout(() => this.closeAlert(), 2000);
@@ -47,7 +57,7 @@ class App extends Component {
   closeAlert = () => this.setState({ alert: null });
 
   render() {
-    const { users, loading, alert } = this.state;
+    const { users, loading, alert, user } = this.state;
     return (
       <Router>
         <Navigation icon="fab fa-github" title="GitHub Finder" />
@@ -76,6 +86,18 @@ class App extends Component {
               )}
             />
             <Route exact path="/about" component={About} />
+            <Route
+              exact
+              path="/users/:login"
+              render={(props) => (
+                <User
+                  {...props}
+                  getUser={this.getUser}
+                  user={user}
+                  loading={loading}
+                />
+              )}
+            />
           </Switch>
         </Container>
       </Router>

@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 
 const UserItem = (props) => {
-  const { id, login, avatar_url, html_url } = props.user;
+  const { id, login, avatar_url } = props.user;
   return (
     <Card
       border="primary"
@@ -25,9 +26,9 @@ const UserItem = (props) => {
         />
         <br />
         <br />
-        <a href={html_url} rel="noopener noreferrer">
+        <Link to={`/users/${login}`} rel="noopener noreferrer">
           <button className={`btn btn-primary`}>More Info</button>
-        </a>
+        </Link>
       </Card.Body>
     </Card>
   );
