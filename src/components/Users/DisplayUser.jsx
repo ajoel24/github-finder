@@ -87,6 +87,13 @@ const DisplayUser = (props) => {
             <a href={html_url} target="_blank" rel="noopener noreferrer">
               <Button className="btn btn-success">Visit GitHub Profile</Button>
             </a>
+            <br />
+            <br />
+            {blog && (
+              <a href={blog} target="_blank" rel="noopener noreferrer">
+                <Button className="btn btn-secondary">Visit Blog</Button>
+              </a>
+            )}
           </Col>
         </Row>
       </Card>
