@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import Navigation from '../Layouts/Navigation/Navigation';
 import Users from '../Users/Users';
 import Search from '../Search/Search';
 import Alerts from '../Layouts/Alerts/Alerts';
+import About from '../Pages/About';
 import './App.css';
 
 class App extends Component {
@@ -47,25 +49,36 @@ class App extends Component {
   render() {
     const { users, loading, alert } = this.state;
     return (
-      <Fragment>
+      <Router>
         <Navigation icon="fab fa-github" title="GitHub Finder" />
         <Container>
-          {alert && (
-            <Alerts
-              type={alert.type}
-              message={alert.message}
-              onClose={this.closeAlert}
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <Fragment>
+                  {alert && (
+                    <Alerts
+                      type={alert.type}
+                      message={alert.message}
+                      onClose={this.closeAlert}
+                    />
+                  )}
+                  <Search
+                    searchUsers={this.searchUsers}
+                    clearUsers={this.clearUsers}
+                    showClear={users.length > 0 ? true : false}
+                    setAlert={this.setAlert}
+                  />
+                  <Users loading={loading} users={users} />
+                </Fragment>
+              )}
             />
-          )}
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-          />
-          <Users loading={loading} users={users} />
+            <Route exact path="/about" component={About} />
+          </Switch>
         </Container>
-      </Fragment>
+      </Router>
     );
   }
 }
