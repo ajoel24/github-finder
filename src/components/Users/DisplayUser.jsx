@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Button, Card, Row, Col, Badge } from 'react-bootstrap';
+import Repos from '../Repos/Repos';
 
 const DisplayUser = (props) => {
   const {
@@ -121,8 +123,15 @@ const DisplayUser = (props) => {
           </h3>
         </Row>
       </Card>
+      <Card style={styles.card}>
+        <Repos repos={props.repos} />
+      </Card>
     </Container>
   );
 };
 
+DisplayUser.propTypes = {
+  user: PropTypes.object.isRequired,
+  repos: PropTypes.array.isRequired,
+};
 export default DisplayUser;
