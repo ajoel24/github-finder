@@ -18,14 +18,15 @@ const App = () => {
   const [alert, setAlert] = useState(null);
 
   useEffect(() => {
-    (async function () {
+    async function fetchData() {
       setLoading(true);
       const usersRes = await axios.get(
         `https://api.github.com/users?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
       );
       setUsers(usersRes.data);
       setLoading(false);
-    })();
+    }
+    fetchData();
   }, []);
 
   const searchUsers = async (username) => {

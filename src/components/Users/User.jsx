@@ -10,7 +10,7 @@ const User = (props) => {
   useEffect(() => {
     getUser(paramName);
     getUserRepos(paramName);
-  }, [paramName, getUser, getUserRepos]);
+  }, []);
 
   return loading ? <SpinnerItem /> : <DisplayUser user={user} repos={repos} />;
 };
