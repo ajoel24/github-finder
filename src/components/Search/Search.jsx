@@ -1,65 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Jumbotron } from 'react-bootstrap';
 
-class Search extends Component {
-  constructor() {
-    super();
-    this.state = {
-      username: '',
-    };
-  }
+const Search = (props) => {
+  const [username, setUsername] = useState('');
+  const { setAlert, searchUsers, clearUsers, showClear } = props;
 
-  handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
+  const handleChange = (e) => setUsername(e.target.value);
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.username.trim() === '') {
-      this.props.setAlert('warning', 'Please enter a username');
+    if (username.trim() === '') {
+      setAlert('warning', 'Please enter a username');
     } else {
-      this.props.searchUsers(this.state.username);
-      this.setState({ username: '' });
+      searchUsers(username);
+      setUsername('');
     }
   };
 
-  handleClear = (e) => {
-    this.props.clearUsers();
+  const handleClear = () => {
+    clearUsers();
   };
 
-  render() {
-    return (
-      <Jumbotron>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="search">
-            <Form.Label>Search</Form.Label>
-            <Form.Control
-              type="text"
-              name="username"
-              placeholder="Type a username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-            <Form.Text className="text-muted">
-              Find the details of GitHub users.
-            </Form.Text>
-          </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-            style={{ marginRight: '1rem' }}
-          >
-            Submit
+  return (
+    <Jumbotron>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="search">
+          <Form.Label>Search</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+            placeholder="Type a username"
+            value={username}
+            onChange={handleChange}
+          />
+          <Form.Text className="text-muted">
+            Find the details of GitHub users.
+          </Form.Text>
+        </Form.Group>
+        <Button variant="primary" type="submit" style={{ marginRight: '1rem' }}>
+          Submit
+        </Button>
+        {showClear && (
+          <Button variant="secondary" type="clear" onClick={handleClear}>
+            Clear Users
           </Button>
-          {this.props.showClear && (
-            <Button variant="secondary" type="clear" onClick={this.handleClear}>
-              Clear Users
-            </Button>
-          )}
-        </Form>
-      </Jumbotron>
-    );
-  }
-}
+        )}
+      </Form>
+    </Jumbotron>
+  );
+};
 
 Search.propTypes = {
   searchUsers: PropTypes.func.isRequired,
