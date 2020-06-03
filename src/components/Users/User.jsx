@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SpinnerItem from '../Layouts/Spinner/SpinnerItem';
 import DisplayUser from './DisplayUser';
 
-class User extends Component {
-  componentDidMount() {
-    this.props.getUser(this.props.match.params.login);
-    this.props.getUserRepos(this.props.match.params.login);
-  }
+const User = (props) => {
+  const { loading, user, repos, getUser, getUserRepos } = props;
+  const paramName = props.match.params.login;
 
-  render() {
-    const { loading, user, repos } = this.props;
-    return loading ? (
-      <SpinnerItem />
-    ) : (
-      <DisplayUser user={user} repos={repos} />
-    );
-  }
-}
+  useEffect(() => {
+    getUser(paramName);
+    getUserRepos(paramName);
+  }, [paramName, getUser, getUserRepos]);
+
+  return loading ? <SpinnerItem /> : <DisplayUser user={user} repos={repos} />;
+};
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   getUser: PropTypes.func.isRequired,
   getUserRepos: PropTypes.func.isRequired,
+  repos: PropTypes.array.isRequired,
 };
 
 export default User;
