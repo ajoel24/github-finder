@@ -1,20 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { CardColumns } from 'react-bootstrap';
 import UserItem from './UserItem';
 import SpinnerItem from '../Layouts/Spinner/SpinnerItem';
+import GithubContext from '../../context/github/githubContext';
 
 const generateUser = (user) => <UserItem key={user.id} user={user} />;
 
-const Users = (props) =>
-  props.loading ? (
+const Users = () => {
+  const githubContext = useContext(GithubContext);
+  const { loading, users } = githubContext;
+  return loading ? (
     <SpinnerItem />
   ) : (
-    <CardColumns>{props.users.map(generateUser)}</CardColumns>
+    <CardColumns>{users.map(generateUser)}</CardColumns>
   );
-
-Users.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  users: PropTypes.array.isRequired,
 };
 export default Users;

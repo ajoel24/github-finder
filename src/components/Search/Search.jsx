@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Jumbotron } from 'react-bootstrap';
+import GithubContext from '../../context/github/githubContext';
 
 const Search = (props) => {
+  const githubContext = useContext(GithubContext);
+  const { clearUsers, users } = githubContext;
+
   const [username, setUsername] = useState('');
-  const { setAlert, searchUsers, clearUsers, showClear } = props;
+  const { setAlert } = props;
 
   const handleChange = (e) => setUsername(e.target.value);
 
@@ -13,7 +17,7 @@ const Search = (props) => {
     if (username.trim() === '') {
       setAlert('warning', 'Please enter a username');
     } else {
-      searchUsers(username);
+      githubContext.searchUsers(username);
       setUsername('');
     }
   };
@@ -41,7 +45,7 @@ const Search = (props) => {
         <Button variant="primary" type="submit" style={{ marginRight: '1rem' }}>
           Submit
         </Button>
-        {showClear && (
+        {users.length > 0 && (
           <Button variant="secondary" type="clear" onClick={handleClear}>
             Clear Users
           </Button>
@@ -52,9 +56,6 @@ const Search = (props) => {
 };
 
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
