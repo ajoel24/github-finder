@@ -11,6 +11,16 @@ import {
   GET_REPOS,
 } from '../types';
 
+let githubClientId, githubClientSecret;
+
+if (process.env.NODE_ENV !== 'production') {
+  githubClientId = process.env.REACT_APP_CLIENT_ID;
+  githubClientSecret = process.env.REACT_APP_CLIENT_SECRET;
+} else {
+  githubClientId = process.env.CLIENT_ID;
+  githubClientSecret = process.env.CLIENT_SECRET;
+}
+
 const GithubState = (props) => {
   const initialState = {
     users: [],
@@ -25,7 +35,7 @@ const GithubState = (props) => {
   const getDefaultUsers = async () => {
     setLoading();
     const usersRes = await axios.get(
-      `https://api.github.com/users?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+      `https://api.github.com/users?client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     dispatch({
       type: GET_DEFAULT_USERS,
@@ -37,7 +47,7 @@ const GithubState = (props) => {
   const searchUsers = async (username) => {
     setLoading();
     const usersSearchRes = await axios.get(
-      `https://api.github.com/search/users?q=${username}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+      `https://api.github.com/search/users?q=${username}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     dispatch({
       type: SEARCH_USERS,
@@ -49,7 +59,7 @@ const GithubState = (props) => {
   const getUser = async (username) => {
     setLoading();
     const userSearchRes = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     dispatch({ type: GET_USER, payload: userSearchRes.data });
   };
@@ -58,7 +68,7 @@ const GithubState = (props) => {
   const getUserRepos = async (username) => {
     setLoading();
     const userSearchRes = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     dispatch({ type: GET_REPOS, payload: userSearchRes.data });
   };
