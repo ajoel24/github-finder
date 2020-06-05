@@ -1,5 +1,6 @@
 # GitHub Finder
 ### A React application to fetch profiles from GitHub
+![](https://img.shields.io/github/license/Andrew2432/github-finder)
 
 ## Table of Contents:
 * [About](#about)
@@ -24,7 +25,7 @@ It sends a `GET` request to the GitHub API and fetches the required user's profi
 ### Setup:
 Open a new terminal and use the following commands. You will require `npm`.
 ```bash
- git clone https://github.com/Andrew2432/github-finder.git
+git clone https://github.com/Andrew2432/github-finder.git
 npm install
 npm start 
 ```
