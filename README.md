@@ -1,6 +1,6 @@
 # GitHub Finder
 ### A React application to fetch profiles from GitHub
-![](https://img.shields.io/github/license/Andrew2432/github-finder)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/593ca52a-dcd3-4dd7-8e94-d86ba7fd9c38/deploy-status)](https://app.netlify.com/sites/github-find-profiles/deploys)
 
 ## Table of Contents:
 * [About](#about)
