@@ -4,7 +4,6 @@ import {
   SET_LOADING,
   CLEAR_USERS,
   GET_USER,
-  GET_USERS,
   GET_REPOS,
 } from '../types';
 

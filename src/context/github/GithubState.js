@@ -8,7 +8,6 @@ import {
   CLEAR_USERS,
   GET_DEFAULT_USERS,
   GET_USER,
-  GET_USERS,
   GET_REPOS,
 } from '../types';
 

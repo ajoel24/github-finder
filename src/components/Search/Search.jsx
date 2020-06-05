@@ -1,21 +1,23 @@
 import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Button, Jumbotron } from 'react-bootstrap';
 import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Search = (props) => {
+const Search = () => {
   const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
+
   const { clearUsers, users } = githubContext;
+  const { createAlert } = alertContext;
 
   const [username, setUsername] = useState('');
-  const { setAlert } = props;
 
   const handleChange = (e) => setUsername(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username.trim() === '') {
-      setAlert('warning', 'Please enter a username');
+      createAlert('warning', 'Please enter a username');
     } else {
       githubContext.searchUsers(username);
       setUsername('');
@@ -53,10 +55,6 @@ const Search = (props) => {
       </Form>
     </Jumbotron>
   );
-};
-
-Search.propTypes = {
-  setAlert: PropTypes.func.isRequired,
 };
 
 export default Search;

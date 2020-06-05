@@ -12,6 +12,7 @@ const User = (props) => {
   useEffect(() => {
     getUser(paramName);
     getUserRepos(paramName);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return loading ? <SpinnerItem /> : <DisplayUser user={user} repos={repos} />;
