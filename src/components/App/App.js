@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import Navigation from '../Layouts/Navigation/Navigation';
 import User from '../Users/User';
 import About from '../Pages/About/About';
-import Home from '../Pages/Home';
+import Home from '../Pages/Home/Home';
 import NotFound from '../Pages/NotFound';
 import './App.css';
 import GithubContext from '../../context/github/githubContext';
