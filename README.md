@@ -23,9 +23,11 @@ It sends a `GET` request to the GitHub API and fetches the required user's profi
 
 ### Setup:
 Open a new terminal and use the following commands. You will require `npm`.
-> `git clone https://github.com/Andrew2432/github-finder.git`
-> `npm install`
-> `npm start`
+> `git clone https://github.com/Andrew2432/github-finder.git` 
+> 
+> `npm install` 
+> 
+> `npm start` 
 
 ### Inspiration:
 This project is developed while referring to Brad Traversy's Udemy course on React.
